@@ -1,7 +1,7 @@
 ##
 # Represents a single bowling game.
 class Game < ActiveRecord::Base
-  has_many :frames
+  has_many :frames, dependent: :destroy
 
   ##
   # Returns the frames for this game, grouped by player_id

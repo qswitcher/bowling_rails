@@ -52,4 +52,33 @@ describe 'Games API', :type => :request do
     expect(json[0]).to include('id', 'url', 'name')
   end
 
+  it 'allows deletion of games' do
+    game = Game.create(name: 'Delete me!')
+    frame = Frame.create(game: game, number: 1, player_id: 1)
+
+    expect(Game.where(id: game.id)).to exist
+    expect(Frame.where(id: frame.id)).to exist
+
+    delete "/games/#{game.id}", request_headers
+
+    expect(response).to be_success
+    expect(Game.where(id: game.id)).to_not exist
+    expect(Frame.where(id: frame.id)).to_not exist
+  end
+
+  it 'allows updates of a game' do
+    game = Game.create(name: 'Old name')
+
+    payload = {
+        game:{
+            name: 'New name'
+        }
+    }.to_json
+
+    put "/games/#{game.id}", payload, request_headers
+
+    expect(response).to be_success
+    game.reload
+    expect(game.name).to eq('New name')
+  end
 end

@@ -83,4 +83,14 @@ describe 'Frames API', :type => :request do
 
   end
 
+  it 'allows deletion of frames' do
+    frame = Frame.create(game: game, number: 1, player_id: 93)
+
+    expect(Frame.where(id: frame.id)).to exist
+
+    delete "/frames/#{frame.id}", request_headers
+
+    expect(response).to be_success
+    expect(Frame.where(id: frame.id)).to_not exist
+  end
 end

@@ -13,6 +13,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'pg'
 
+# Remove when fix for issue https://github.com/Apipie/apipie-rails/issues/354 is released
+gem 'apipie-rails', github: 'Apipie/apipie-rails', ref: '928bd858fd14ec67eeb9483ba0d43b3be8339608'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'byebug'

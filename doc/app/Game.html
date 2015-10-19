@@ -165,7 +165,8 @@ otherwise.</p>
           <div class="method-source-code" id="score_for_player-source">
             <pre><span class="ruby-comment"># File app/models/game.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">score_for_player</span>(<span class="ruby-identifier">player_id</span>)
-  <span class="ruby-constant">Frame</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">game</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>, <span class="ruby-identifier">player_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">player_id</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;number DESC&#39;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">cumulative_score</span>
+  <span class="ruby-identifier">highest_frame</span> = <span class="ruby-constant">Frame</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">game</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>, <span class="ruby-identifier">player_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">player_id</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;number DESC&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">highest_frame</span>.<span class="ruby-identifier">cumulative_score</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">highest_frame</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
